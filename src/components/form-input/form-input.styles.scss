@@ -1,0 +1,22 @@
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .input_heading {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px auto;
+  }
+
+  .input-field {
+    box-sizing: border-box;
+    width: 25%;
+    padding: 10px 10px 10px 5px;
+    margin: 10px auto;
+    font-size: 16px;
+  }
+
+
+}
