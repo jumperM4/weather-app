@@ -3,9 +3,7 @@ import { createContext } from "react";
 export const weatherDataContext = createContext();
 
 export const WeatherDataProvider = ({ children }) => {
-  const dataContext = {
-    // locationQuery: "",
-  };
+  const dataContext = {};
 
   return (
     <weatherDataContext.Provider value={dataContext}>
