@@ -1,43 +1,42 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+
+import { weatherDataContext } from "../../context/weatherData.context";
 
 import "./form-input.styles.scss";
 
-import Button from "../button/button";
-
-const defaultFields = {
-  location: "",
-};
-
 const FormInput = () => {
-  const APIkey = `6e953700d3384e35d16e642789c645b6`;
-  const [inputValue, setInputValue] = useState(defaultFields);
-  const { location } = inputValue;
+  const dataContext = useContext(weatherDataContext);
 
-  const resetFields = () => {
-    setInputValue(defaultFields);
-  };
+  const [inputValue, setInputValue] = useState(dataContext);
+
+  //console.log(inputValue);
+
+  // const resetFields = () => {
+  //     setInputValue(dataContext.lo);
+  // };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setInputValue({ ...defaultFields, [name]: value });
+    setInputValue({ ...dataContext, [name]: value });
   };
 
-  const makingAPIcall = async (location, key) => {
-    const url = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=2&appid=${key}`;
-    console.log(url);
-    await fetch(url)
-      .then((response) => {
-        return response.json();
-      })
-      .then((res) => {
-        console.log(res);
-        return res;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-    resetFields();
-  };
+  console.log(inputValue);
+
+  // const makingAPIcall = async (location, key) => {
+  //   const url = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=2&appid=${key}`;
+  //   await fetch(url)
+  //     .then((response) => {
+  //       return response.json();
+  //     })
+  //     .then((res) => {
+  //       console.log(res);
+  //       return res;
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  //   resetFields();
+  // };
 
   return (
     <div className="input-container">
@@ -51,7 +50,9 @@ const FormInput = () => {
         placeholder="city or town"
         onChange={handleChange}
       ></input>
-      <Button type="submit" onClick={() => makingAPIcall(location, APIkey)} />
+      <button className="input-button" type="submit">
+        CLICK
+      </button>
     </div>
   );
 };
