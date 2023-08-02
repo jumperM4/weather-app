@@ -11,9 +11,9 @@ const FormInput = () => {
   const [inputValue, setInputValue] = useState(dataContext);
   const { location } = inputValue;
 
-  const resetFields = () => {
-    setInputValue(dataContext);
-  };
+  // const resetFields = () => {
+  //   setInputValue(dataContext);
+  // };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -21,32 +21,33 @@ const FormInput = () => {
   };
 
   const makingAPIcall = async (location, key) => {
-    const geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=2&appid=${key}`;
-    await fetch(geoUrl)
-      .then((response) => {
-        return response.json();
-      })
-      .then((res) => {
-        const [{ lat, lon }] = res;
-        const getWeather = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}`;
-        fetch(getWeather)
-          .then((response) => {
-            return response.json();
-          })
-          .then((res) => {
-            console.log(res);
-          });
-        // async fetch()
-        // setInputValue({
-        //   ...inputValue,
-        //   latitude: lat,
-        //   longitude: lon,
-        // });
-        // return res;
-      })
-      .catch((error) => {
-        console.log(error);
+    const geoUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${key}&units=metric&lang=ru`;
+    try {
+      const response = await fetch(geoUrl);
+      const weatherData = await response.json();
+      console.log(weatherData);
+
+      const { main, sys, weather, wind } = weatherData;
+
+      const { temp, pressure, humidity } = main;
+      const { sunrise, sunset } = sys;
+      const [{ description }] = weather;
+      const { speed } = wind;
+
+      setInputValue({
+        ...inputValue,
+        temperature: temp,
+        pressure,
+        humidity,
+        sunrise,
+        sunset,
+        windSpeed: speed,
+        weatherDescription: description,
       });
+    } catch (error) {
+      alert(error);
+    }
+
     // resetFields();
   };
 
