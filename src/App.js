@@ -10,12 +10,14 @@ import WeatherInfo from "./components/weather-info.component/weather-info.compon
 
 function App() {
   const dataContext = useContext(weatherDataContext);
+  console.log(dataContext);
+
   const [fetchedData, setFetchedData] = useState(dataContext);
 
-  const makingAPIcall = async (location, key) => {
-    const geoUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${key}&units=metric&lang=ru`;
+  const makingAPIcall = async (url) => {
+    // const geoUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${key}&units=metric&lang=ru`;
     try {
-      const response = await fetch(geoUrl);
+      const response = await fetch(url);
       const weatherData = await response.json();
 
       const { main, sys, weather, wind, name } = weatherData;

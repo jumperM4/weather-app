@@ -1,5 +1,3 @@
-
-
 import "./weather-info.component.styles.scss";
 
 const WeatherInfo = (props) => {
@@ -42,11 +40,10 @@ const WeatherInfo = (props) => {
   return (
     <div className="weather-container">
       <div className="city-temperature-container">
-        <div className="cityname">{name}</div>
+        <div className="cityname">{name}: </div>
         <div className="city-temperature">{temperature} градусов</div>
+        <div className="weather-description">{weatherDescription}</div>
       </div>
-
-      <div className="weather-description">{weatherDescription}</div>
 
       <div className="sunrise-sunset-container">
         <div className="sunrise">Восход: {getSunriseTime(sunrise)}</div>
@@ -55,7 +52,7 @@ const WeatherInfo = (props) => {
 
       <div className="humidity-pressure-windspeed-container">
         <div className="humidity">{humidity}%</div>
-        <div className="pressure">{pressure}мм.рт.ст</div>
+        <div className="pressure">{pressure} мм.рт.ст</div>
         <div className="wind-speed">{windSpeed} м\с</div>
       </div>
     </div>
