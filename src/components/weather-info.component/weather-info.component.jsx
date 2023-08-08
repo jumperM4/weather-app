@@ -1,7 +1,12 @@
 import "./weather-info.component.styles.scss";
 
-const WeatherInfo = (props) => {
-  const { fetchedData } = props;
+import { useContext } from "react";
+
+import { weatherDataContext } from "../../context/weatherData.context";
+
+const WeatherInfo = () => {
+  const { weather } = useContext(weatherDataContext);
+
   const {
     humidity,
     name,
@@ -11,7 +16,7 @@ const WeatherInfo = (props) => {
     temperature,
     weatherDescription,
     windSpeed,
-  } = fetchedData;
+  } = weather;
 
   const getSunriseTime = (sunriseTime) => {
     const sunrise = new Date(sunriseTime * 1000);
