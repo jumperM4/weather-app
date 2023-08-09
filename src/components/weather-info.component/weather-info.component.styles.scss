@@ -1,3 +1,9 @@
+.no-data-container {
+  font-size: 25px;
+  position: relative;
+  margin: 0px auto;
+}
+
 .weather-container {
   display: flex;
   flex-direction: row;
@@ -18,7 +24,9 @@
 
   .cityname,
   .sunrise,
-  .humidity, .city-temperature, .pressure {
+  .humidity,
+  .city-temperature,
+  .pressure {
     margin-bottom: 20px;
   }
 }

@@ -1,14 +1,20 @@
 import { createContext, useState } from "react";
 
-export const weatherDataContext = createContext({
-  makingAPIcall: () => {},
-  isWeatherData: false,
-});
+export const weatherDataContext = createContext({});
 
 export const WeatherDataProvider = ({ children }) => {
   const [weather, setWeather] = useState({});
 
-  // const geoUrl = `https://api.openweathermap.org/data/2.5/weather?q=London&appid=6e953700d3384e35d16e642789c645b6&units=metric&lang=ru`;
+  const baseURL = `https://api.openweathermap.org/data/2.5/weather`;
+  const APIkey = `6e953700d3384e35d16e642789c645b6`;
+
+  const paramsString = {
+    appid: APIkey,
+    units: "metric",
+    lang: "en",
+  };
+
+  const params = new URLSearchParams(paramsString);
 
   const makingAPIcall = async (url) => {
     try {
@@ -42,8 +48,9 @@ export const WeatherDataProvider = ({ children }) => {
   const value = {
     weather,
     makingAPIcall,
+    baseURL,
+    params,
   };
-  console.log(weather);
 
   return (
     <weatherDataContext.Provider value={value}>

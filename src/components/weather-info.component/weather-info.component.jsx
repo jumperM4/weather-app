@@ -7,6 +7,10 @@ import { weatherDataContext } from "../../context/weatherData.context";
 const WeatherInfo = () => {
   const { weather } = useContext(weatherDataContext);
 
+  const isEmpty = !Object.keys(weather).length;
+  console.log(weather);
+  console.log(isEmpty);
+
   const {
     humidity,
     name,
@@ -43,24 +47,30 @@ const WeatherInfo = () => {
   };
 
   return (
-    <div className="weather-container">
-      <div className="city-temperature-container">
-        <div className="cityname">{name}: </div>
-        <div className="city-temperature">{temperature} градусов</div>
-        <div className="weather-description">{weatherDescription}</div>
-      </div>
+    <>
+      {isEmpty ? (
+        <></>
+      ) : (
+        <div className="weather-container">
+          <div className="city-temperature-container">
+            <div className="cityname">{name} </div>
+            <div className="city-temperature">{temperature} degrees</div>
+            <div className="weather-description">{weatherDescription}</div>
+          </div>
 
-      <div className="sunrise-sunset-container">
-        <div className="sunrise">Восход: {getSunriseTime(sunrise)}</div>
-        <div className="sunset">Закат: {getSunsetTime(sunset)}</div>
-      </div>
+          <div className="sunrise-sunset-container">
+            <div className="sunrise">Sunrise at: {getSunriseTime(sunrise)}</div>
+            <div className="sunset">Sunset at: {getSunsetTime(sunset)}</div>
+          </div>
 
-      <div className="humidity-pressure-windspeed-container">
-        <div className="humidity">{humidity}%</div>
-        <div className="pressure">{pressure} мм.рт.ст</div>
-        <div className="wind-speed">{windSpeed} м\с</div>
-      </div>
-    </div>
+          <div className="humidity-pressure-windspeed-container">
+            <div className="humidity">Humidity: {humidity}%</div>
+            <div className="pressure">Atmospheric pressure: {pressure} hPa</div>
+            <div className="wind-speed">Wind speed: {windSpeed} meter\sec</div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
