@@ -1,0 +1,32 @@
+.no-data-container {
+  font-size: 25px;
+  position: relative;
+  margin: 0px auto;
+}
+
+.weather-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  margin: 20px 0px;
+
+  .city-temperature-container,
+  .sunrise-sunset-container,
+  .humidity-pressure-windspeed-container {
+    display: flex;
+    margin: 20px 20px 20px 20px;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    font-size: 20px;
+  }
+
+  .cityname,
+  .sunrise,
+  .humidity,
+  .city-temperature,
+  .pressure {
+    margin-bottom: 20px;
+  }
+}

@@ -5,42 +5,21 @@ import { weatherDataContext } from "../../context/weatherData.context";
 import "./form-input.styles.scss";
 
 const FormInput = () => {
-  const dataContext = useContext(weatherDataContext);
+  const { makingAPIcall, params, baseURL } = useContext(weatherDataContext);
 
-  const [inputValue, setInputValue] = useState(dataContext);
+  const [inputValue, setInputValue] = useState({});
+  const { location } = inputValue;
 
-  //console.log(inputValue);
-
-  // const resetFields = () => {
-  //     setInputValue(dataContext.lo);
-  // };
+  const url = baseURL + `?q=${location}&` + params.toString();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setInputValue({ ...dataContext, [name]: value });
+    setInputValue({ ...inputValue, [name]: value });
   };
-
-  console.log(inputValue);
-
-  // const makingAPIcall = async (location, key) => {
-  //   const url = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=2&appid=${key}`;
-  //   await fetch(url)
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then((res) => {
-  //       console.log(res);
-  //       return res;
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  //   resetFields();
-  // };
 
   return (
     <div className="input-container">
-      <label className="input_heading" for="location">
+      <label className="input_heading" htmlFor="location">
         Введите название города
       </label>
       <input
@@ -50,7 +29,11 @@ const FormInput = () => {
         placeholder="city or town"
         onChange={handleChange}
       ></input>
-      <button className="input-button" type="submit">
+      <button
+        className="input-button"
+        type="submit"
+        onClick={() => makingAPIcall(url)}
+      >
         CLICK
       </button>
     </div>
